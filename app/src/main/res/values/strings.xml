@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">VUT Paragraf</string>
+    <string name="prehlad_ot_zok">Prehlad otázok</string>
+    <string name="test_v_porad">Test v poradí</string>
+    <string name="test_n_hodne">Test náhodne</string>
+    <string name="koniec">Koniec</string>
+</resources>
