@@ -1,5 +1,4 @@
 package com.example.vutparagraf
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle;
 
@@ -10,24 +9,34 @@ class PrehladOtazok : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.prehlad_otazok)
+    /*    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        var question = Question()
-        var answer = Answer()
+        var question = Question(this)
+        var answer = Answer(this)
         val cislo_otazky = findViewById<TextView>(R.id.cisOtazky)
         val otazka = findViewById<TextView>(R.id.otazka)
         val odpoved = findViewById<TextView>(R.id.odpoved)
         val button_back = findViewById<Button>(R.id.tl_back)
         val button_next = findViewById<Button>(R.id.tl_next)
-        val button_menu = findViewById<Button>(R.id.tl_menu)
         var j = 0
 
         fun init(i: Int){
-            if (i >= 0 && i < answer.corrAnswers.size) {
-                var cislo = "${i + 1} / ${answer.corrAnswers.size}"
+            if (i >= 0 && i < answer.sizeOfCorrAnsw()) {
+                button_back.isEnabled = true
+                button_next.isEnabled = true
+                var cislo = "${i + 1} / ${answer.sizeOfCorrAnsw()}"
                 cislo_otazky.text = cislo
                 otazka.text = question.makeQuestion(i).toString()
-                odpoved.text = answer.corrAnswers[i].toString()
-            } else if (i < 0) j = 0 else j = answer.corrAnswers.size-1 //kontrola pretecenia "j" do - alebo na rozmer pola
+                odpoved.text = answer.corrAnswer(i).toString()
+            }
+            if (i <= 0) {//kontrola pretecenia "j" do - alebo na rozmer pola
+                j = 0
+                button_back.isEnabled = false
+            }
+            if(i >= answer.sizeOfCorrAnsw()-1) {
+                j = answer.sizeOfCorrAnsw()-1
+                button_next.isEnabled = false
+            }
         }
 
         init(j)
@@ -38,10 +47,7 @@ class PrehladOtazok : AppCompatActivity() {
         button_next.setOnClickListener {
             j++
             init(j)
-        }
-        button_menu.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+        }*/
+
     }
 }

@@ -7,48 +7,70 @@
     tools:context=".Vporadi"
     android:orientation="vertical"
     android:gravity="center"
+    android:layout_margin="20dp"
+    >
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_weight="0.3"
+    android:gravity="center"
     >
     <TextView
         android:id="@+id/cisOtazky"
-        android:layout_gravity="left"
+        android:gravity="left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
+        android:layout_weight="1"
+        android:textSize="7pt"
         />
     <TextView
-        android:id="@+id/otazka"
+        android:id="@+id/pocetSpravnych"
+        android:gravity="left"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_weight="1"
+        android:textSize="7pt"
+        />
+</LinearLayout>
+
+
+    <TextView
+        android:id="@+id/otazka"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:text=""
+        android:layout_weight="1"
+        android:textSize="10pt"
         />
     <Button
         android:id="@+id/tl1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:text=""
         />
     <Button
         android:id="@+id/tl2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:text=""
         />
     <Button
         android:id="@+id/tl3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="50dp"
         android:text=""
+
         />
-    <Button
-        android:id="@+id/tl_back"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="Naspäť do hlavného menu"
-        android:background="@android:color/holo_red_light"
-        />
+
+
 </android.widget.LinearLayout>

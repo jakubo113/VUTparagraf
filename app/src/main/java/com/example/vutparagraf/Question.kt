@@ -1,27 +1,41 @@
 package com.example.vutparagraf
 
-import java.io.File
-import java.io.InputStream
 
-class Question {
+import android.content.Context
+import kotlin.properties.Delegates
 
-    //val questions = arrayOf("otazka1", "otazka2", "otazka3", "otazka4")
-    val fileName = "/app/src/main/res/raw/otazky.txt"
-    val questions: List<String> = File(fileName).readLines()
+class Question(con: Context, private val otazka: String , private val otazkaId:Int) {
+    /* Question
+*   - P: text (otazka)
+*   - P: possibleAnswers => List<Answer>
+*   - M: answer(answer)
+*   - M: getAnswers() => List<Answer>
+*   - M: getQuestionText() => string
+*
+* Quiz
+*   - P: questions: List<Question>
+*   - P: actualQuestionIndex++ [index]
+*   - M: nextQuestion()
+*   - M: getResult()
+*/
 
-   /* fun dataZoSuboru(cesta: String): Array<String> {
-        val inputStream: InputStream = File(cesta).inputStream()
+    private val correctAnswers = GetFromFile().dataZoSuboru(con, R.raw.spravne_odpovede)
+    private val allAnswers = GetFromFile().dataZoSuboru(con, R.raw.odpovede)
 
-        var line = arrayOf<String>()
-        inputStream.bufferedReader().forEachLine { line += it }
-        return line
-    }*/
-    //val questions = dataZoSuboru("./vutparagraf/otazky.txt")
+    private val possibleAnswers = allAnswers.subList(otazkaId * 3, (otazkaId * 3) + 3)
 
-    fun makeQuestion(i: Int): String {
-        //val  cesta = this::class.java.classLoader?.getResource("otazky.txt")?.readText()
+    fun getAnswers(): List<Answer> {
+        return possibleAnswers.map {
+            val isCorrect = correctAnswers.contains(it)
+            Answer(it, isCorrect)
+        }
+    }
 
-        //println("TUUUUUU " + cesta)
-        return questions[i]
+    fun getQuestionText(): String {
+        return otazka
+    }
+
+    fun getQuestionCorrectness(): Int {
+        return otazkaId
     }
 }

@@ -1,0 +1,8 @@
+mn do 50 V; nn do 1000 V; vn do 52 kV
+230/400 V
+50 V~ a 120 V=
+25 V~ a 60 V=
+5 Ω, ve ztížených podmínkách nejvýše 15 Ω
+nesmí použít
+u nichž mohou vzniknout proudy nebezpečné osobám, zvířatům a věcem
+vlivem prostředí je zde stálé nebo přechodné nebezpečí úrazu elektrickým proudem

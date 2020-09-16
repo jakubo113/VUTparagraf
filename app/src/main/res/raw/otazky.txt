@@ -1,4 +1,8 @@
-A
-B
-C
-D
+Rozdělení EZ podle napětí mezi vodiči v uzemněné střídavé soustavě je:
+Jmenovité napětí střídavých rozvodných sítí v ČR je:
+Mez bezpečných jmenovitých napětí při předpokládaném dotyku neživých částí v prostorech normálních je:
+Dovolené meze trvalého dotykového napětí v prostorech normálních i nebezpečných pro EZ do 1000 V jsou:
+Odpor uzemnění uzlu zdroje nemá být větší než:
+Plynové potrubí se jako náhodný ochranný vodič:
+Silnoproudá zařízení jsou zařízení:
+Obecná charakteristika prostorů nebezpečných říká, že:

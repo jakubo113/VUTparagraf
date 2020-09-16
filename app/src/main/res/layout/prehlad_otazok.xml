@@ -1,50 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.LinearLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PrehladOtazok"
+    android:layout_margin="20dp"
     android:gravity="center"
-
-    tools:context=".PrehladOtazok">
+    >
     <TextView
         android:id="@+id/cisOtazky"
-        android:layout_gravity="left"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="left"
+        android:layout_weight="0.3"
+        android:textSize="7pt"
+
         />
     <TextView
         android:id="@+id/otazka"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:text="" />
-    <TextView
-        android:id="@+id/odpoved"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:text="" />
-    <Button
-        android:id="@+id/tl_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Späť"
-        />
-
-    <Button
-        android:id="@+id/tl_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ďalej" />
-    <Button
-        android:id="@+id/tl_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@android:color/holo_red_light"
-        android:text="Naspäť do hlavného menu" />
+        android:text=""
+
+        android:layout_marginTop="50dp"
+        android:layout_weight="1"
+        android:textSize="10pt"
+
+        />
+    <TextView
+        android:id="@+id/odpoved"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+
+        android:layout_weight="1"
+        android:textSize="10pt"
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/horizont"
+        android:layout_marginBottom="50dp"
+        >
+        <Button
+            android:id="@+id/tl_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Späť"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/tl_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ďalej"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
 
-</android.widget.LinearLayout>
+</LinearLayout>
