@@ -17,8 +17,6 @@ class Vporadi : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-//        val question = Question(this)
-//        val answer = Answer(this)
         // OBJEKTY
         val quiz = Quiz(this)
         // INICIALIZACIA LAYOUT
@@ -29,9 +27,6 @@ class Vporadi : AppCompatActivity() {
         val button_ot2 = findViewById<Button>(R.id.tl2)
         val button_ot3 = findViewById<Button>(R.id.tl3)
         // POMOCNE PREMENNE
-        /*var poleSpravnychOdpovedi = arrayOf<Int>()
-        var cisOtazka = -1
-        var counterSpravnych = 0*/
         var toast: Toast? = null
 
         fun makeToastik(text: String): Toast {
@@ -39,63 +34,9 @@ class Vporadi : AppCompatActivity() {
             t.show()
             return t
         }
-//        fun showData(cisOtazky: Int, pocSpravnych: Int){
-//            val cislo = "č.otázky: ${cisOtazky + 1} / ${answer.sizeOfCorrAnsw()}"
-//            cislo_otazky.text = cislo
-//            val pocet = "správne: ${pocSpravnych} / ${answer.sizeOfCorrAnsw()}"
-//            pocetSpravnych.text = pocet
-//            otazka.text = question.makeQuestion(cisOtazky)
-//            button_ot1.text = answer.posibilities((cisOtazky * 3))
-//            button_ot2.text = answer.posibilities((cisOtazky * 3) + 1)
-//            button_ot3.text = answer.posibilities((cisOtazky * 3) + 2)
-//        }
-
-
-        /**
-         *
-         * class Question {
-         *
-         *    Question(answers, questionText) {
-         *       this.answers = answers;
-         *       questionText = questionText
-         *    }
-         *
-         *    bool answer(Answer answer) {
-         *       return answer.isCorrect();
-         *    }
-         *
-         *    getAnswers()
-         *       return this.answers;
-         *    }
-         *
-         *    getQuestionText() ...
-         * }
-         *
-         * new Answer("Ohmov zakon", true/false);
-         *
-         *
-         * Answer
-         *   - P: text (odpoved)
-         *   - P: correct (bool)
-         *   - construct(text, correct)
-         *   - M: isCorrectAnswer(): bool
-         *
-         * Question
-         *   - P: text (otazka)
-         *   - P: possibleAnswers => List<Answer>
-         *   - M: answer(answer)
-         *   - M: getAnswers() => List<Answer>
-         *   - M: getQuestionText() => string
-         *
-         * Quiz
-         *   - P: questions: List<Question>
-         *   - P: actualQuestionIndex++ [index]
-         *   - M: nextQuestion()
-         *   - M: getResult()
-         */
 
         fun showData(question: Question){
-            val cislo = "č.otázky: ${quiz.getQuestionNumber()} / ${quiz.getQuestionsSize()}"
+            val cislo = "č.otázky: ${quiz.getQuestion().getQuestionNumber()} / ${quiz.getQuestionsSize()}"
             cislo_otazky.text = cislo
             val pocet = "správne: ${quiz.getnumberOfCorrQues()} / ${quiz.getQuestionsSize()}"
             pocetSpravnych.text = pocet
@@ -110,21 +51,18 @@ class Vporadi : AppCompatActivity() {
         button_ot1.setOnClickListener {
             if (toast != null){toast?.cancel()}
             toast = makeToastik(quiz.isCorrectAnswerText(quiz.getQuestion().getAnswers()[0]))
-            //if (answer.answertrue(button_ot1.text.toString())) {counterSpravnych++; poleSpravnychOdpovedi += cisOtazka}
             quiz.nextQuestion()
             showData(quiz.getQuestion())
         }
         button_ot2.setOnClickListener {
             if (toast != null){toast?.cancel()}
             toast = makeToastik(quiz.isCorrectAnswerText(quiz.getQuestion().getAnswers()[1]))
-            //if (answer.answertrue(button_ot2.text.toString())) {counterSpravnych++; poleSpravnychOdpovedi += cisOtazka}
             quiz.nextQuestion()
             showData(quiz.getQuestion())
         }
         button_ot3.setOnClickListener {
             if (toast != null){toast?.cancel()}
             toast = makeToastik(quiz.isCorrectAnswerText(quiz.getQuestion().getAnswers()[2]))
-            //if (answer.answertrue(button_ot3.text.toString())) {counterSpravnych++; poleSpravnychOdpovedi += cisOtazka}
             quiz.nextQuestion()
             showData(quiz.getQuestion())
         }

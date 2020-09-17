@@ -35,7 +35,7 @@ class Question(con: Context, private val otazka: String , private val otazkaId:I
         return otazka
     }
 
-    fun getQuestionCorrectness(): Int {
-        return otazkaId
+    fun getQuestionNumber(): Int {
+        return otazkaId+1
     }
 }

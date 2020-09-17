@@ -11,7 +11,7 @@ class Quiz {
     private var indexOtazky = 0
     private var numberOfCorrectQuestions = 0
     private var con: Context? = null
-
+    private var questionsSize = 0
 
     constructor(con: Context) {
         val otazky = GetFromFile().dataZoSuboru(con, R.raw.otazky)
@@ -19,25 +19,29 @@ class Quiz {
             Question(con, it, otazky.indexOf(it))
         }
         this.con = con
+        this.questionsSize = questions.size
     }
 
     fun getQuestion(): Question{
-       return questions[indexOtazky]
+        return if(indexOtazky < questions.size){
+            questions[indexOtazky]
+        } else{
+            showDialog()
+            indexOtazky = 0
+            questions[indexOtazky]
+        }
     }
 
     fun nextQuestion() {
-        indexOtazky++
+        if (numberOfCorrectQuestions < questionsSize)
+            indexOtazky++
+        else
+            exitProcess(-1)
     }
-
 
     fun getQuestionsSize(): Int {
-        return questions.size
+        return questionsSize
     }
-
-    fun getQuestionNumber(): Int {
-        return indexOtazky++
-    }
-
 
     fun getnumberOfCorrQues(): Int{
         return numberOfCorrectQuestions
@@ -46,21 +50,20 @@ class Quiz {
     fun isCorrectAnswerText(answer: Answer): String{
         return if (answer.isCorrectAnswer()){
             numberOfCorrectQuestions++
-            questions.filterIndexed { index, question -> indexOtazky }
+            (questions as MutableList).remove(questions[indexOtazky])
+            indexOtazky-- // Lebo ked vymaze prvoko tak automaticky je hned na dalsom prvku preto treba ked vymze znizit index
             "Spravne"
         } else
             "Nespravne"
     }
 
-    fun showDialog(){
+    private fun showDialog(){
         val dialog: AlertDialog.Builder = AlertDialog.Builder(con)
         dialog.setTitle("Chcete pokračovať v teste?")
 
-        dialog.setPositiveButton("Áno", DialogInterface.OnClickListener{ dialog, which -> dialog.dismiss(); indexOtazky = 0})
+        dialog.setPositiveButton("Áno", DialogInterface.OnClickListener{ dialog, which -> dialog.dismiss()})
         dialog.setNegativeButton("Nie", DialogInterface.OnClickListener{ dialog, which -> exitProcess(-1) })
         val alertDialog: AlertDialog = dialog.create()
         alertDialog.show()
     }
-
-
 }
