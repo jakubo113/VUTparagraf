@@ -14,104 +14,56 @@ class Nahodne : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-/*        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val question = Question(this)
-        val answer = Answer(this)
-        val poleOtazok = arrayListOf<Int>()
-        var poleSpravnychOdpovedi = arrayOf<Int>()
+        // OBJEKTY
+        val quiz = Quiz(this, true)
+        // INICIALIZACIA LAYOUT
         val cislo_otazky = findViewById<TextView>(R.id.cisOtazky)
         val pocetSpravnych = findViewById<TextView>(R.id.pocetSpravnych)
         val otazka = findViewById<TextView>(R.id.otazka)
         val button_ot1 = findViewById<Button>(R.id.tl1)
         val button_ot2 = findViewById<Button>(R.id.tl2)
         val button_ot3 = findViewById<Button>(R.id.tl3)
-
-        var cisOtazka = -1
-        var counterSpravnych = 0
+        // POMOCNE PREMENNE
         var toast: Toast? = null
 
-        for (i in 0..answer.sizeOfCorrAnsw()-1){
-            poleOtazok.add(i)
-        }
-        poleOtazok.shuffle()
-
-        fun showDialog(){
-            val dialog: AlertDialog.Builder = AlertDialog.Builder(this)
-            dialog.setTitle("Chcete pokračovať v teste?")
-
-            dialog.setPositiveButton("Áno", DialogInterface.OnClickListener{ dialog, which -> dialog.dismiss()})
-            dialog.setNegativeButton("Nie", DialogInterface.OnClickListener{ dialog, which -> exitProcess(-1) })
-            val alertDialog: AlertDialog = dialog.create()
-            alertDialog.show()
-        }
         fun makeToastik(text: String): Toast {
             var t = Toast.makeText(applicationContext,text,Toast.LENGTH_SHORT)
             t.show()
             return t
         }
-        // ZOBRATOVANIE ACTIVITY<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        fun showData(cisOtazky: Int, pocSpravnych: Int){
-            var i = poleOtazok[cisOtazky]
-            val cislo = "č.otázky: ${poleOtazok.indexOf(i)+1} / ${answer.sizeOfCorrAnsw()}"
-            cislo_otazky.text =  cislo
-            val pocet = "správne: ${pocSpravnych} / ${answer.sizeOfCorrAnsw()}"
+
+        fun showData(question: Question){
+            val cislo = "č.otázky: ${question.getQuestionNumber()} / ${quiz.getQuestionsSize()}"
+            cislo_otazky.text = cislo
+            val pocet = "správne: ${quiz.getnumberOfCorrQues()} / ${quiz.getQuestionsSize()}"
             pocetSpravnych.text = pocet
-            otazka.text = question.makeQuestion(poleOtazok[i])
-            button_ot1.text = answer.posibilities(poleOtazok[i]*3)
-            button_ot2.text = answer.posibilities((poleOtazok[i]*3)+1)
-            button_ot3.text = answer.posibilities((poleOtazok[i]*3)+2)
-        }
-        // LOGIKA ZOBRAZOVANIA OTAZOK<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        fun init(i: Int, pocetSpravnych: Int, poleSpravnychOdpovedi: kotlin.Array<Int>): Int {
-            var cisOtazky = i + 1
-            when {
-                cisOtazky < answer.corrAnswers.size && pocetSpravnych < answer.sizeOfCorrAnsw()-> {
-                    while (cisOtazky < answer.corrAnswers.size){
-                        if (!poleSpravnychOdpovedi.contains(cisOtazky)) {
-                            showData(cisOtazky,pocetSpravnych)
-                            break
-                        }else{
-                            cisOtazky++
-                        }
-                        if(cisOtazky == answer.corrAnswers.size){
-                            cisOtazky = init(-1, pocetSpravnych,poleSpravnychOdpovedi)
-                            break//TOTO----------------------------------------<<<<<<<<<<<<<<<<<<<<<<<
-                        }
-                    }
-                }
-                pocetSpravnych < answer.sizeOfCorrAnsw() -> {
-                    showDialog()
-                    cisOtazky = init(-1, pocetSpravnych,poleSpravnychOdpovedi)
-                }
-                else -> {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
-            }
-            return cisOtazky
+            otazka.text = question.getQuestionText()
+            button_ot1.text = question.getAnswers()[0].odpoved
+            button_ot2.text = question.getAnswers()[1].odpoved
+            button_ot3.text = question.getAnswers()[2].odpoved
         }
 
-
-        cisOtazka = init(cisOtazka, counterSpravnych,poleSpravnychOdpovedi)
+        showData(quiz.getQuestion())
 
         button_ot1.setOnClickListener {
             if (toast != null){toast?.cancel()}
-            toast = makeToastik(answer.answer(button_ot1.text.toString()))
-            if (answer.answertrue(button_ot1.text.toString())) {counterSpravnych++; poleSpravnychOdpovedi += cisOtazka}
-            cisOtazka = init(cisOtazka,counterSpravnych,poleSpravnychOdpovedi )
+            toast = makeToastik(quiz.isCorrectAnswerText(quiz.getQuestion().getAnswers()[0]))
+            quiz.nextQuestion()
+            showData(quiz.getQuestion())
         }
         button_ot2.setOnClickListener {
             if (toast != null){toast?.cancel()}
-            toast = makeToastik(answer.answer(button_ot2.text.toString()))
-            if (answer.answertrue(button_ot2.text.toString())) {counterSpravnych++; poleSpravnychOdpovedi += cisOtazka}
-            cisOtazka = init(cisOtazka,counterSpravnych,poleSpravnychOdpovedi )
+            toast = makeToastik(quiz.isCorrectAnswerText(quiz.getQuestion().getAnswers()[1]))
+            quiz.nextQuestion()
+            showData(quiz.getQuestion())
         }
         button_ot3.setOnClickListener {
             if (toast != null){toast?.cancel()}
-            toast = makeToastik(answer.answer(button_ot3.text.toString()))
-            if (answer.answertrue(button_ot3.text.toString())) {counterSpravnych++; poleSpravnychOdpovedi += cisOtazka}
-            cisOtazka = init(cisOtazka,counterSpravnych,poleSpravnychOdpovedi )
-        }*/
+            toast = makeToastik(quiz.isCorrectAnswerText(quiz.getQuestion().getAnswers()[2]))
+            quiz.nextQuestion()
+            showData(quiz.getQuestion())
+        }
     }
 }

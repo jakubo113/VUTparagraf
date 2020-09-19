@@ -1,14 +1,10 @@
 package com.example.vutparagraf
 
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.system.exitProcess
 
 class Vporadi : AppCompatActivity() {
 
@@ -18,7 +14,7 @@ class Vporadi : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // OBJEKTY
-        val quiz = Quiz(this)
+        val quiz = Quiz(this, false)
         // INICIALIZACIA LAYOUT
         val cislo_otazky = findViewById<TextView>(R.id.cisOtazky)
         val pocetSpravnych = findViewById<TextView>(R.id.pocetSpravnych)
@@ -36,7 +32,7 @@ class Vporadi : AppCompatActivity() {
         }
 
         fun showData(question: Question){
-            val cislo = "č.otázky: ${quiz.getQuestion().getQuestionNumber()} / ${quiz.getQuestionsSize()}"
+            val cislo = "č.otázky: ${question.getQuestionNumber()} / ${quiz.getQuestionsSize()}"
             cislo_otazky.text = cislo
             val pocet = "správne: ${quiz.getnumberOfCorrQues()} / ${quiz.getQuestionsSize()}"
             pocetSpravnych.text = pocet

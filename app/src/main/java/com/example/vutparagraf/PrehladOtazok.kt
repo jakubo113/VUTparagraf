@@ -9,45 +9,45 @@ class PrehladOtazok : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.prehlad_otazok)
-    /*    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        var question = Question(this)
-        var answer = Answer(this)
+        val quiz = Quiz(this, false)
         val cislo_otazky = findViewById<TextView>(R.id.cisOtazky)
         val otazka = findViewById<TextView>(R.id.otazka)
         val odpoved = findViewById<TextView>(R.id.odpoved)
         val button_back = findViewById<Button>(R.id.tl_back)
         val button_next = findViewById<Button>(R.id.tl_next)
-        var j = 0
 
-        fun init(i: Int){
-            if (i >= 0 && i < answer.sizeOfCorrAnsw()) {
-                button_back.isEnabled = true
-                button_next.isEnabled = true
-                var cislo = "${i + 1} / ${answer.sizeOfCorrAnsw()}"
-                cislo_otazky.text = cislo
-                otazka.text = question.makeQuestion(i).toString()
-                odpoved.text = answer.corrAnswer(i).toString()
-            }
-            if (i <= 0) {//kontrola pretecenia "j" do - alebo na rozmer pola
-                j = 0
-                button_back.isEnabled = false
-            }
-            if(i >= answer.sizeOfCorrAnsw()-1) {
-                j = answer.sizeOfCorrAnsw()-1
-                button_next.isEnabled = false
+        fun showData(question: Question){
+            var cislo = "${question.getQuestionNumber()} / ${quiz.getQuestionsSize()}"
+            cislo_otazky.text = cislo
+            otazka.text = question.getQuestionText()
+            odpoved.text = question.getCorrAnswer()
+        }
+
+        fun checkState(){
+            when {
+                quiz.getQuestion().getQuestionNumber() <= 1 -> button_back.isEnabled = false
+                quiz.getQuestion().getQuestionNumber() >= quiz.getQuestionsSize() -> button_next.isEnabled = false
+                else -> {
+                    button_next.isEnabled = true
+                    button_back.isEnabled = true
+                }
             }
         }
 
-        init(j)
+        showData(quiz.getQuestion())
+        checkState()
+
         button_back.setOnClickListener {
-            j--
-            init(j)
+            quiz.changeQuestion(false)
+            checkState()
+            showData(quiz.getQuestion())
         }
         button_next.setOnClickListener {
-            j++
-            init(j)
-        }*/
-
+            quiz.changeQuestion(true)
+            checkState()
+            showData(quiz.getQuestion())
+        }
     }
 }

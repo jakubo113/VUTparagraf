@@ -7,17 +7,18 @@ import kotlin.system.exitProcess
 
 class Quiz {
 
-    private var questions: List<Question> = emptyList()
+    var questions = mutableListOf<Question>()
     private var indexOtazky = 0
     private var numberOfCorrectQuestions = 0
     private var con: Context? = null
     private var questionsSize = 0
 
-    constructor(con: Context) {
+    constructor(con: Context, random: Boolean) {
         val otazky = GetFromFile().dataZoSuboru(con, R.raw.otazky)
         questions = GetFromFile().dataZoSuboru(con, R.raw.otazky).map {
             Question(con, it, otazky.indexOf(it))
-        }
+        }.toMutableList()
+        if (random) questions.shuffle()
         this.con = con
         this.questionsSize = questions.size
     }
@@ -50,13 +51,12 @@ class Quiz {
     fun isCorrectAnswerText(answer: Answer): String{
         return if (answer.isCorrectAnswer()){
             numberOfCorrectQuestions++
-            (questions as MutableList).remove(questions[indexOtazky])
+            questions.remove(questions[indexOtazky])
             indexOtazky-- // Lebo ked vymaze prvoko tak automaticky je hned na dalsom prvku preto treba ked vymze znizit index
             "Spravne"
         } else
             "Nespravne"
     }
-
     private fun showDialog(){
         val dialog: AlertDialog.Builder = AlertDialog.Builder(con)
         dialog.setTitle("Chcete pokračovať v teste?")
@@ -65,5 +65,13 @@ class Quiz {
         dialog.setNegativeButton("Nie", DialogInterface.OnClickListener{ dialog, which -> exitProcess(-1) })
         val alertDialog: AlertDialog = dialog.create()
         alertDialog.show()
+    }
+
+//PRE PREHLAD OTAZOK
+    fun changeQuestion(dirrect: Boolean){
+         if (dirrect) {
+            indexOtazky++
+        }else
+             indexOtazky--
     }
 }
