@@ -22,15 +22,18 @@ class Question(con: Context, private val otazka: String , private val otazkaId:I
     private val correctAnswers = GetFromFile().dataZoSuboru(con, R.raw.spravne_odpovede)
     private val allAnswers = GetFromFile().dataZoSuboru(con, R.raw.odpovede)
 
-    private val possibleAnswers = allAnswers.subList(otazkaId * 3, (otazkaId * 3) + 3).toMutableList()
+    private val possibleTextOfAnswers = allAnswers.subList(otazkaId * 3, (otazkaId * 3) + 3)
+    private val possibleAnswers = possibleTextOfAnswers.map {
+        val isCorrect = correctAnswers.contains(it)
+        Answer(it, isCorrect)
+    }.toMutableList()
+
+    fun mixAnswers(){
+        possibleAnswers.shuffle()
+    }
 
     fun getAnswers(): List<Answer> {
-        possibleAnswers.shuffle()
-        return possibleAnswers.map {
-            val isCorrect = correctAnswers.contains(it)
-            Answer(it, isCorrect)
-        }.toMutableList()
-
+        return possibleAnswers
     }
 
     fun getQuestionText(): String {

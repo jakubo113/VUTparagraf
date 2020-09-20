@@ -32,6 +32,7 @@ class Vporadi : AppCompatActivity() {
         }
 
         fun showData(question: Question){
+            question.mixAnswers()
             val cislo = "č.otázky: ${question.getQuestionNumber()} / ${quiz.getQuestionsSize()}"
             cislo_otazky.text = cislo
             val pocet = "správne: ${quiz.getnumberOfCorrQues()} / ${quiz.getQuestionsSize()}"
