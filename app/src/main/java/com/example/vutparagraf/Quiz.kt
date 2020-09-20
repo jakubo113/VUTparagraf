@@ -15,12 +15,12 @@ class Quiz {
 
     constructor(con: Context, random: Boolean) {
         this.con = con
-        this.questionsSize = questions.size
         val data = Data(con)
         questions = data.getAllQuestions().map {
             Question(it, data)
         }.toMutableList()
         if (random) questions.shuffle()
+        this.questionsSize = questions.size
     }
 
     fun getQuestion(): Question{
