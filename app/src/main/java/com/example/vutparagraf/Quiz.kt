@@ -6,21 +6,21 @@ import android.content.DialogInterface
 import kotlin.system.exitProcess
 
 class Quiz {
-
     var questions = mutableListOf<Question>()
     private var indexOtazky = 0
     private var numberOfCorrectQuestions = 0
-    private var con: Context? = null
     private var questionsSize = 0
+    private var con: Context? = null
+
 
     constructor(con: Context, random: Boolean) {
-        val otazky = GetFromFile().dataZoSuboru(con, R.raw.otazky)
-        questions = GetFromFile().dataZoSuboru(con, R.raw.otazky).map {
-            Question(con, it, otazky.indexOf(it))
-        }.toMutableList()
-        if (random) questions.shuffle()
         this.con = con
         this.questionsSize = questions.size
+        val data = Data(con)
+        questions = data.getAllQuestions().map {
+            Question(it, data)
+        }.toMutableList()
+        if (random) questions.shuffle()
     }
 
     fun getQuestion(): Question{

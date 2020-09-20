@@ -1,13 +1,9 @@
 package com.example.vutparagraf
 
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import android.widget.*
-import kotlin.system.exitProcess
 
 class Nahodne : AppCompatActivity() {
 
